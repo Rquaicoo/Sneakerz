@@ -1,9 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="signup">
-<input type="text" placeholder="hello">
-<input type="text" placeholder="surname"><br>
-<input type="date"> 
+<form method="post">
+    {% csrf_token %}
+    <input type="text">
+    <input type="text" placeholder="Enter first name"><br>
+    <input type="text" placeholder="Last name"><br>
+    <input type="text" placeholder="Phonenumber"><br>
+    <input type="text" placeholder="Password"><br>
+    <p>Password must be more than 8 characters</p>
+    <input type="text" placeholder="Confirm your password">
+    <h3>Enter your date of birth</h3>
+    <span>
+        <select name="month">
+           <option value="01">January</option>
+           <option value="02">February</option>
+           <option value="03">March</option>
+           <option value="04">April</option>
+           <option value="05">May</option>
+           <option value="06">June</option>
+           <option value="07">July</option>
+           <option value="08">August</option>
+           <option value="09">September</option>
+           <option value="10">October</option>
+           <option value="11">November</option>
+           <option value="12">December</option>
+        </select> 
+   </span>
+   <span>
+        <input type="text" placeholder="year">
+   </span>
+   <span><input type="text" placeholder="Day of birth"></span>
+   <h3>Choose your gender</h3>
+   <select>
+       <option value="male">Male</option>
+       <option value="female">Female</option>
+   </select>
+   <p>By clicking sign up, you have agreed to our <a  href="#">terms and conditions</a> and have read our <a href="#">privacy policy</a>.</p>
+    <button type="submit">SIGN UP</button>
 </form>
 {% endblock %}
