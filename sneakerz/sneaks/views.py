@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, request
+from .models import *
 # Create your views here.
 
 def home(request):
@@ -12,7 +13,8 @@ def signin(request):
     return render(request, 'signin.html')
 
 def store(request):
-    context = {} #for passing in data
+    products = Product.objects.all()
+    context = {'products': products} #for passing in data
     return render(request, 'store.html', context)
 
 def cart(request):
