@@ -38,6 +38,15 @@ class Order(models.Model):
         return str(self.id)
 
     @property
+    def shipping(self):
+        shipping = False
+        orderitems = self.orderitem_set.all()
+        for i in orderitems:      #will be modified by me
+            if i.product.digital ==False:
+                shipping = True  
+        return shipping
+
+    @property
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
@@ -65,9 +74,9 @@ class OrderItem(models.Model):
 class ShippingAddress(models.Model):
      customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
      order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
-     region = models.IntegerField(max_length=200, null=False)
-     city = models.IntegerField(max_length=200, null=False)
-     pickup = models.IntegerField(max_length=200, null=False)
+     region = models.CharField(max_length=200, null=False)
+     city = models.CharField(max_length=200, null=False)
+     pickup = models.CharField(max_length=200, null=False)
      date_added = models.DateTimeField(auto_now_add=True)
 
      def __str__(self):

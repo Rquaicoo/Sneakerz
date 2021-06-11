@@ -5,6 +5,7 @@
     <head>
         <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimun-scale=1" />
         <title>Ecommerce</title>
     </head>
     <style>
@@ -15,7 +16,7 @@
 }
 
 body {
-	background: #f6f5f7;
+	background-image: url('https://g.foolcdn.com/image/?url=https%3A//g.foolcdn.com/editorial/images/439737/carbon-adidas-pair-of-3d-printed-shoes.png&w=2000&op=resize');
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -107,7 +108,7 @@ input {
 	overflow: hidden;
 	width: 768px;
 	max-width: 100%;
-	min-height: 480px;
+	min-height: 600px;
 }
 
 .form-container {
@@ -315,9 +316,9 @@ footer a {
         <footer>
             <p>
                 Created with <i class="fa fa-heart"></i> by
-                <a target="_blank" href="https://florin-pop.com">Florin Pop</a>
-                - Read how I created this and how you can join the challenge
-                <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
+                <a href="{% url 'home' %}">Sneakerz</a>
+                - Cool sneakers from Adidas and Nike
+                <a href="{% url 'store'%}">here</a>.
             </p>
         </footer>
     </body>
