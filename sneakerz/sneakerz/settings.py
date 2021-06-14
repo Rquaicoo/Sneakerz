@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',    
     'sneaks',
 ]
 
@@ -134,4 +135,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = ''
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '537055600760187'       # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'a37bb437f7a316800d877f305aaff43eReset'
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '776xxyhacib94g'         #Client ID
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET =   'rY0zujoQUzAaFFzG' #Client Secret

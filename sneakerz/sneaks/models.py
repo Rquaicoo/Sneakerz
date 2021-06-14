@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 # Create your models here.
 class Customer(models.Model):
@@ -8,7 +9,25 @@ class Customer(models.Model):
     email = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.user)
+
+    def create_customer(sender, instance, created, **kwargs):
+        #check if instance is created
+        if created:
+            Customer.objects.create(user=instance)
+            print('Customer created')
+
+    post_save.connect(create_customer, sender=User) #create_customer is the reciever
+'''
+    def update_customer(sender, instance, created, **kwargs):
+        if created == False:
+            instance.customer.save()
+            print('Customer updated')
+
+    post_save.connect(update_customer, sender=User) #update_customer is the reciever'''
+
+
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100, null=True)
@@ -80,4 +99,4 @@ class ShippingAddress(models.Model):
      date_added = models.DateTimeField(auto_now_add=True)
 
      def __str__(self):
-        return self.adddress
+        return self.pickup

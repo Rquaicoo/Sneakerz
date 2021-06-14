@@ -1,24 +1,65 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, request
 import json
 import datetime
 from .models import *
-# Create your views here.
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
+from django.contrib.auth.decorators import login_required
+# Create your views here.
+@login_required(login_url='login')
 def home(request):
     return render(request, 'home.html')
 
-def signin_signup(request):
-    return render(request, 'signin_signup.html')
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect('store')
+    else:
+        form = CreateUserForm()
+        
+        
+        
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user )
+                return redirect('store')
+        
+        context = {'form': form}
+        return render(request, 'signup.html', context)
 
-def signin(request):
-    return render(request, 'signin.html')
+def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('store')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
+            user = authenticate(request, username=username, password=password)
 
+            if user is not None:
+                login(request, user)
+                return redirect('store')
 
+            else:
+                messages.info(request, 'USERNAME or PASSWORD is incorrect')
+                return render(request, 'login.html', {})
 
+        context = {}
+        return render(request, 'login.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+@login_required(login_url='login')
 def store(request):
-
     if request.user.is_authenticated:
         customer = request.user.customer  
         order, created = Order.objects.get_or_create(customer=customer, complete= False)     
@@ -34,7 +75,7 @@ def store(request):
     return render(request, 'store.html', context)
 
 
-
+@login_required(login_url='login')
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer  
@@ -47,10 +88,10 @@ def cart(request):
         cartItems = order['get_cart_items']
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'cart.html', context)
+    
 
 
-
-
+@login_required(login_url='login')
 def checkout(request):
     if request.user.is_authenticated:
         customer = request.user.customer  
@@ -65,7 +106,7 @@ def checkout(request):
     return render(request, 'checkout.html', context)
 
 
-
+@login_required(login_url='login')
 def updateItem(request):
     data = json.loads(request.body) #passing in the data
     productId = data['productId'] #querying data from cart.js 
