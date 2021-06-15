@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%ckf+-mzv9=bi$5%g@x1nyjn5r6j#+1kp_t5ckh*gez9s2^sxe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sneakerz1.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -151,3 +152,14 @@ SOCIAL_AUTH_FACEBOOK_SECRET = 'a37bb437f7a316800d877f305aaff43eReset'
 
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '776xxyhacib94g'         #Client ID
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET =   'rY0zujoQUzAaFFzG' #Client Secret
+
+
+#SMTP(Simple Mail Transfer Protocol) Configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'russell.django@gmail.com'
+EMAIL_HOST_PASSWORD = 'RDjangoq18'
+
