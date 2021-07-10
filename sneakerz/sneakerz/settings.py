@@ -151,11 +151,11 @@ LOGIN_REDIRECT_URL = ''
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '537055600760187'       # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'a37bb437f7a316800d877f305aaff43eReset'
+SOCIAL_AUTH_FACEBOOK_KEY = '**************'       # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '*************'
 
-SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '776xxyhacib94g'         #Client ID
-SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET =   'rY0zujoQUzAaFFzG' #Client Secret
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '************'         #Client ID
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET =   '*************' #Client Secret
 
 
 #SMTP(Simple Mail Transfer Protocol) Configuration
@@ -165,5 +165,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'russell.django@gmail.com'
-EMAIL_HOST_PASSWORD = 'RDjangoq18'
-
+EMAIL_HOST_PASSWORD = '*********'
